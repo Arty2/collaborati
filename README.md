@@ -92,4 +92,4 @@ Chrome 117+, Safari 17.5+, Firefox 129+. File sync: Chrome/Edge only.
 
 ## License
 
-Dialectic Acheropoieton of [Heracles Papatheodorou](https://heracl.es), MIT License
+Dialectic Acheiropoieton of [Heracles Papatheodorou](https://heracl.es) and Claude, MIT License
