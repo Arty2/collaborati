@@ -4,7 +4,8 @@ A local-first kanban board. No account, no server — your data stays in the bro
 
 - Live instance: [collaborati.online](https://collaborati.online)
 - Project website: [heracl.es/collaborati](https://heracl.es/collaborati)
-- Current version: 0.81 (2026-04-06)
+- Source code: [github.com/arty2/collaborati](https://github.com/arty2/collaborati)
+- Current version: 0.82 (2026-07-27)
 
 ## Mental model
 
@@ -84,7 +85,22 @@ Stage templates remap columns semantically: Kanban, Scrum, GTD, Sales, CRM, Cont
 
 ## Architecture
 
-Single-file HTML app (~275 KB). Three-level keyed DOM reconciler with card signature memoization and RAF-coalesced renders. OPFS primary persistence, IndexedDB fallback, inline Web Worker for off-main-thread writes. File sync via File System Access API with SHA-256 change detection.
+Single-file HTML app (~330 KB, assembled from `src/`). Three-level keyed DOM reconciler with card signature memoization and RAF-coalesced renders. OPFS primary persistence, IndexedDB fallback, inline Web Worker for off-main-thread writes. File sync via File System Access API with SHA-256 change detection. Installable as a PWA (inline web app manifest + service worker for offline use).
+
+## Build & deploy
+
+No framework and no runtime dependencies — the app is one static file. Sources live in `src/` (HTML shell, CSS split by `@layer`, JS split by section) and a zero-dependency Node script inlines them into the single `collaborati.html`:
+
+```sh
+node build.js            # regenerate collaborati.html   (npm run build)
+node build.js --check    # fail if the committed file is stale
+npm test                 # Playwright smoke tests
+npm run test:integrity   # build-integrity checks (no browser)
+```
+
+Edit `src/`, run `node build.js`, and commit both the source change and the regenerated `collaborati.html`. GitHub Actions builds, verifies the committed file is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
+
+Hosting is static. On Vercel, `vercel.json` rewrites `/` to `/collaborati.html`; `_redirects` covers Netlify/Cloudflare Pages.
 
 ## Browser support
 

@@ -1,0 +1,50 @@
+@layer tokens {
+	:root {
+		--bg: #e3dedb;
+		--surface: #ede8e4;
+		--surface2: #ddd7d2;
+		--surface3: #cec7c0;
+		--border: #c8c0b8;
+		--border2: #b8b0a8;
+		--text: #2b0000;
+		--text2: #4a2020;
+		--muted: #7a5040;
+		--faint: #b89880;
+		--accent: #bd1e2e;
+		--blue: #2b4abd;
+		--green: #2a7a3e;
+		--yellow: #a07820;
+		--red: #bd1e2e;
+
+		--blue-bg: color-mix(in oklch, var(--blue) 12%, var(--surface));
+		--yellow-bg: color-mix(in oklch, var(--yellow) 12%, var(--surface));
+		--red-bg: color-mix(in oklch, var(--red) 12%, var(--surface));
+		--green-bg: color-mix(in oklch, var(--green) 12%, var(--surface));
+		--accent-bg: color-mix(in oklch, var(--accent) 10%, var(--surface));
+
+		--mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+		--sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		--hh: 48px;
+		--sw: 48px;
+		--cw: 230px;
+		--inbox-w: 260px;
+
+
+	}
+
+	[data-theme="dark"] {
+		--bg: #2b0000;
+		--surface: #3a0a00;
+		--surface2: #480e00;
+		--surface3: #5a1400;
+		--border: #6a2010;
+		--border2: #7a3018;
+		--text: #bd9f5c;
+		--text2: #d4b880;
+		--muted: #8a6040;
+		--faint: #5a3020;
+	}
+
+	[data-theme="dark"] body { color-scheme: dark; }
+}
+
