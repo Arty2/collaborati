@@ -42,10 +42,11 @@ test('help panel shows the current version', async ({ page }) => {
 	await expect(panel).toContainText('0.82 (2026-07-27)');
 });
 
-test('exposes a valid inline web app manifest', async ({ page }) => {
+test('links a valid web app manifest served as a separate file', async ({ page }) => {
 	await page.goto(APP);
 	const link = page.locator('link[rel="manifest"]');
 	await expect(link).toHaveCount(1);
+	await expect(link).toHaveAttribute('href', '/manifest.webmanifest');
 
 	const manifest = await page.evaluate(async () => {
 		const href = document.querySelector('link[rel="manifest"]').getAttribute('href');
@@ -56,9 +57,15 @@ test('exposes a valid inline web app manifest', async ({ page }) => {
 	expect(manifest.name).toBe('/collaborati');
 	expect(manifest.short_name).toBe('collaborati');
 	expect(manifest.display).toBe('standalone');
-	expect(manifest.icons.length).toBeGreaterThanOrEqual(2);
 	const sizes = manifest.icons.map((i) => i.sizes);
 	expect(sizes).toContain('192x192');
 	expect(sizes).toContain('512x512');
 	expect(manifest.icons.some((i) => i.purpose && i.purpose.includes('maskable'))).toBe(true);
+
+	// Icons are real files (not inline data URIs) and each one resolves.
+	for (const icon of manifest.icons) {
+		expect(icon.src.startsWith('data:'), 'icon is a file URL, not a data URI').toBe(false);
+		const status = await page.evaluate(async (src) => (await fetch(src)).status, icon.src);
+		expect(status, `icon ${icon.src} is reachable`).toBe(200);
+	}
 });

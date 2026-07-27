@@ -85,7 +85,7 @@ Stage templates remap columns semantically: Kanban, Scrum, GTD, Sales, CRM, Cont
 
 ## Architecture
 
-Single-file HTML app (~330 KB, assembled from `src/`). Three-level keyed DOM reconciler with card signature memoization and RAF-coalesced renders. OPFS primary persistence, IndexedDB fallback, inline Web Worker for off-main-thread writes. File sync via File System Access API with SHA-256 change detection. Installable as a PWA (inline web app manifest + service worker for offline use).
+Single-file HTML app (~281 KB, assembled from `src/`). Three-level keyed DOM reconciler with card signature memoization and RAF-coalesced renders. OPFS primary persistence, IndexedDB fallback, inline Web Worker for off-main-thread writes. File sync via File System Access API with SHA-256 change detection. Installable as a PWA (`manifest.webmanifest` + `icons/` served alongside the app, plus a service worker for offline use).
 
 ## Build & deploy
 
@@ -100,7 +100,9 @@ npm run test:integrity   # build-integrity checks (no browser)
 
 Edit `src/`, run `node build.js`, and commit both the source change and the regenerated `collaborati.html`. GitHub Actions builds, verifies the committed file is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
 
-Hosting is static. On Vercel, `vercel.json` rewrites `/` to `/collaborati.html`; `_redirects` covers Netlify/Cloudflare Pages.
+The PWA manifest (`manifest.webmanifest`) and its icons (`icons/`) are committed static files served next to the app. Regenerate the icons from the brand mark with `npm run gen:icons` (uses the Playwright browser; only needed when the mark or its colors change).
+
+Hosting is static. On Vercel, `vercel.json` rewrites `/` to `/collaborati.html` and serves the manifest/icons alongside it; `_redirects` covers Netlify/Cloudflare Pages.
 
 ## Browser support
 

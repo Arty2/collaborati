@@ -17,23 +17,34 @@ test('committed collaborati.html matches a fresh build (not stale)', () => {
 
 test('built file carries the expected markers', () => {
 	const html = fs.readFileSync(OUT, 'utf8');
-	assert.match(html, /rel="manifest"/, 'inline manifest link present');
 	assert.match(html, /0\.82 \(2026-07-27\)/, 'version string present');
 	assert.match(html, /collaborati-v2/, 'service worker cache bumped to v2');
 	assert.match(html, /rel="apple-touch-icon"/, 'apple-touch-icon present');
+	// The manifest is a separate static file, linked by URL — not inlined.
+	assert.match(html, /rel="manifest" href="\/manifest\.webmanifest"/, 'links the manifest file');
+	assert.doesNotMatch(html, /data:application\/manifest\+json/, 'no inline data: manifest');
 });
 
-test('inline manifest is valid JSON with icons', () => {
-	const html = fs.readFileSync(OUT, 'utf8');
-	const m = html.match(/rel="manifest" href="data:application\/manifest\+json,([^"]+)"/);
-	assert.ok(m, 'manifest data URI found');
-	const manifest = JSON.parse(decodeURIComponent(m[1]));
+test('manifest.webmanifest is valid JSON and its icons exist on disk', () => {
+	const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.webmanifest'), 'utf8'));
 	assert.equal(manifest.name, '/collaborati');
 	assert.equal(manifest.display, 'standalone');
+	assert.equal(manifest.start_url, '/');
 	const sizes = manifest.icons.map((i) => i.sizes);
 	assert.ok(sizes.includes('192x192') && sizes.includes('512x512'), 'has 192 and 512 icons');
 	assert.ok(
 		manifest.icons.some((i) => (i.purpose || '').includes('maskable')),
 		'has a maskable icon',
+	);
+	// Every referenced icon (root-relative /icons/...) is a committed file.
+	for (const icon of manifest.icons) {
+		assert.ok(!icon.src.startsWith('data:'), `icon ${icon.src} is a file, not a data URI`);
+		const rel = icon.src.replace(/^\//, '');
+		assert.ok(fs.existsSync(path.join(ROOT, rel)), `icon file exists: ${rel}`);
+	}
+	// The apple-touch-icon referenced by the HTML also exists.
+	assert.ok(
+		fs.existsSync(path.join(ROOT, 'icons', 'apple-touch-icon-180.png')),
+		'apple-touch-icon file exists',
 	);
 });

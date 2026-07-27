@@ -8,6 +8,7 @@
   "scripts": {
     "build": "node build.js",
     "check": "node build.js --check",
+    "gen:icons": "node tools/gen-icons.js",
     "test": "playwright test",
     "test:integrity": "node --test tests/integrity.test.js"
   },

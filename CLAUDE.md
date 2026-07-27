@@ -57,10 +57,16 @@ which also runs the build, verifies `collaborati.html` isn't stale, and runs bot
 - **Service worker cache** name is `const CACHE = 'collaborati-vN'` in
   `src/app/08-service-worker.js`. Bump `N` whenever you ship HTML changes so returning
   offline/PWA users pick up the new build.
-- **Stay inline / single-file.** The favicon, service worker, and web app manifest are all
-  inlined (data URIs / blob) so the built file remains self-contained and openable from
-  `file://`. Keep it that way. PWA icons are rasterized from the brand `<path>` in
-  `src/index.html`.
+- **Stay inline where it counts.** The favicon and service worker are inlined (data URI /
+  blob) so the built `collaborati.html` stays self-contained and openable from `file://`.
+  Keep those inline.
+- **Manifest & icons are separate static files.** `manifest.webmanifest` and `icons/*.png`
+  live at the repo root and are served next to `collaborati.html` — a real manifest URL is
+  what makes the PWA reliably installable (a `data:` manifest can't resolve `start_url`). The
+  built file still opens from `file://`; the manifest just won't load there, which is fine.
+  Regenerate icons from the brand `<path>` in `src/index.html` with `npm run gen:icons`
+  (`tools/gen-icons.js`, uses the Playwright browser); icons are committed, so this isn't part
+  of the build or deploy.
 - File-sync features use the File System Access API and need `http(s)://` (they're disabled on
   `file://`).
 
@@ -68,5 +74,6 @@ which also runs the build, verifies `collaborati.html` isn't stale, and runs bot
 
 Static hosting, no build required by the host. On **Vercel** the committed `collaborati.html`
 is served and `vercel.json` rewrites `/` → `/collaborati.html` (fixes the root 404;
-`cleanUrls` also makes `/collaborati` resolve). `_redirects` covers Netlify/Cloudflare Pages,
-which Vercel ignores. Repo: https://github.com/arty2/collaborati.
+`cleanUrls` also makes `/collaborati` resolve). `vercel.json` also serves `/manifest.webmanifest`
+with the right `Content-Type` and long-caches `/icons/*`. `_redirects` covers Netlify/Cloudflare
+Pages, which Vercel ignores. Repo: https://github.com/arty2/collaborati.
