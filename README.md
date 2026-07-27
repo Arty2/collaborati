@@ -92,17 +92,17 @@ Single-file HTML app (~281 KB, assembled from `src/`). Three-level keyed DOM rec
 No framework and no runtime dependencies — the app is one static file. Sources live in `src/` (HTML shell, CSS split by `@layer`, JS split by section) and a zero-dependency Node script inlines them into the single `collaborati.html`:
 
 ```sh
-node build.js            # regenerate collaborati.html   (npm run build)
-node build.js --check    # fail if the committed file is stale
+node build.js            # regenerate collaborati.html + index.html   (npm run build)
+node build.js --check    # fail if the committed output is stale
 npm test                 # Playwright smoke tests
 npm run test:integrity   # build-integrity checks (no browser)
 ```
 
-Edit `src/`, run `node build.js`, and commit both the source change and the regenerated `collaborati.html`. GitHub Actions builds, verifies the committed file is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
+The build writes two identical files: `collaborati.html` (the portable, shareable single file, openable from `file://`) and `index.html` (so any static host serves the app at `/`). Edit `src/`, run `node build.js`, and commit both regenerated files with the source change. GitHub Actions builds, verifies the committed output is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
 
 The PWA manifest (`manifest.webmanifest`) and its icons (`icons/`) are committed static files served next to the app. Regenerate the icons from the brand mark with `npm run gen:icons` (uses the Playwright browser; only needed when the mark or its colors change).
 
-Hosting is static — nothing to build on the host. On Vercel, `vercel.json` turns the build off and serves the committed repo root, rewrites `/` to `/collaborati.html`, and serves the manifest/icons alongside it; `_redirects` covers Netlify/Cloudflare Pages.
+Hosting is static — nothing to build on the host. `index.html` at the root makes `/` serve the app on any static host. On Vercel, `vercel.json` turns the build off and serves the committed repo root with the right manifest/icon headers; `_redirects` covers Netlify/Cloudflare Pages.
 
 ## Browser support
 

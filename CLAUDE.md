@@ -26,6 +26,7 @@ src/
                         #   06-cell-editor, 07-modal-wiring, 08-service-worker, 09-boot.
 build.js                # zero-dependency Node build (concatenate + inline).
 collaborati.html        # GENERATED, committed (kept in git so it stays openable/portable).
+index.html              # GENERATED, committed — identical copy so static hosts serve "/".
 ```
 
 The build is **pure concatenation**: the JS stays one global scope exactly as before, so
@@ -72,11 +73,13 @@ which also runs the build, verifies `collaborati.html` isn't stale, and runs bot
 
 ## Deploy
 
-Static hosting, no build required by the host. On **Vercel**, `vercel.json` turns the build
-off (no-op `buildCommand`/`installCommand`, `outputDirectory: "."`) and serves the committed
-repo root — otherwise Vercel sees `package.json`, runs `npm run build`, and then fails looking
-for a `public/` output dir. It rewrites `/` → `/collaborati.html` (fixes the root 404;
-`cleanUrls` also makes `/collaborati` resolve), serves `/manifest.webmanifest` with the right
-`Content-Type`, and long-caches `/icons/*`. `.vercelignore` keeps `src/`, `tests/`, and tooling
-out of the deploy. `_redirects` covers Netlify/Cloudflare Pages, which Vercel ignores.
-Repo: https://github.com/arty2/collaborati.
+Static hosting, no build required by the host. The build emits `index.html` (identical to
+`collaborati.html`), so `/` serves the app on any static host with no rewrite — this is the
+primary fix for the root 404. On **Vercel**, `vercel.json` also turns the build off (no-op
+`buildCommand`/`installCommand`, `outputDirectory: "."`) and serves the committed repo root —
+otherwise Vercel sees `package.json`, runs `npm run build`, and then fails looking for a
+`public/` output dir. `cleanUrls` makes `/collaborati` resolve; the config serves
+`/manifest.webmanifest` with the right `Content-Type` and long-caches `/icons/*`. A `/` →
+`/collaborati.html` rewrite is kept as a harmless fallback behind `index.html`. `.vercelignore`
+keeps `src/`, `tests/`, and tooling out of the deploy. `_redirects` covers Netlify/Cloudflare
+Pages, which Vercel ignores. Repo: https://github.com/arty2/collaborati.

@@ -25,6 +25,12 @@ test('built file carries the expected markers', () => {
 	assert.doesNotMatch(html, /data:application\/manifest\+json/, 'no inline data: manifest');
 });
 
+test('index.html is emitted for root serving and mirrors collaborati.html', () => {
+	const index = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+	const main = fs.readFileSync(OUT, 'utf8');
+	assert.equal(index, main, 'index.html is identical to collaborati.html');
+});
+
 test('manifest.webmanifest is valid JSON and its icons exist on disk', () => {
 	const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.webmanifest'), 'utf8'));
 	assert.equal(manifest.name, '/collaborati');

@@ -18,7 +18,12 @@ const path = require('path');
 
 const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
-const OUT = path.join(ROOT, 'collaborati.html');
+
+// The app ships under two names, both committed and identical:
+//   collaborati.html — the portable, shareable single file (openable from file://)
+//   index.html       — so any static host (Vercel included) serves it at "/" with
+//                      no rewrite needed. Identical content, so git stores one blob.
+const OUTPUTS = ['collaborati.html', 'index.html'].map((f) => path.join(ROOT, f));
 
 const STYLES_MARKER = '/*__BUILD_STYLES__*/\n';
 const SCRIPTS_MARKER = '//__BUILD_SCRIPTS__\n';
@@ -47,13 +52,23 @@ function build() {
 const html = build();
 
 if (process.argv.includes('--check')) {
-	const current = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
-	if (current !== html) {
-		console.error('collaborati.html is out of date — run `node build.js` and commit the result.');
+	const stale = OUTPUTS.filter(
+		(p) => (fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '') !== html,
+	);
+	if (stale.length) {
+		console.error(
+			'Stale build output: ' +
+				stale.map((p) => path.basename(p)).join(', ') +
+				' — run `node build.js` and commit the result.',
+		);
 		process.exit(1);
 	}
-	console.log('collaborati.html is up to date.');
+	console.log('Build output is up to date.');
 } else {
-	fs.writeFileSync(OUT, html);
-	console.log('Built collaborati.html (%d bytes).', Buffer.byteLength(html));
+	for (const p of OUTPUTS) fs.writeFileSync(p, html);
+	console.log(
+		'Built %s (%d bytes).',
+		OUTPUTS.map((p) => path.basename(p)).join(' + '),
+		Buffer.byteLength(html),
+	);
 }

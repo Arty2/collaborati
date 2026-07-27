@@ -22,11 +22,11 @@ jobs:
       - name: Build the single file
         run: node build.js
 
-      - name: Verify committed collaborati.html is up to date
+      - name: Verify committed build output is up to date
         run: |
-          if ! git diff --quiet -- collaborati.html; then
-            echo "::error::collaborati.html is stale. Run \`node build.js\` and commit the result."
-            git --no-pager diff -- collaborati.html
+          if ! git diff --quiet -- collaborati.html index.html; then
+            echo "::error::Build output is stale. Run \`node build.js\` and commit the result."
+            git --no-pager diff -- collaborati.html index.html
             exit 1
           fi
 

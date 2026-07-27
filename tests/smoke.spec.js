@@ -18,6 +18,18 @@ test('boots with a rendered board and no uncaught errors', async ({ page }) => {
 	expect(pageErrors, 'no uncaught page errors on boot').toEqual([]);
 });
 
+test('serves the app at the site root', async ({ page }) => {
+	// index.html is emitted next to collaborati.html so "/" serves the board
+	// directly on any static host (no rewrite required).
+	const pageErrors = [];
+	page.on('pageerror', (e) => pageErrors.push(e.message));
+
+	await page.goto('/');
+	await expect(page).toHaveTitle('/collaborati');
+	await expect(page.locator('#board')).toBeVisible();
+	expect(pageErrors, 'no uncaught page errors at root').toEqual([]);
+});
+
 test('adds a card via quick capture', async ({ page }) => {
 	await page.goto(APP);
 	const badge = page.locator('#inbox-badge');
