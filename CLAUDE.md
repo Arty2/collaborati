@@ -72,8 +72,11 @@ which also runs the build, verifies `collaborati.html` isn't stale, and runs bot
 
 ## Deploy
 
-Static hosting, no build required by the host. On **Vercel** the committed `collaborati.html`
-is served and `vercel.json` rewrites `/` → `/collaborati.html` (fixes the root 404;
-`cleanUrls` also makes `/collaborati` resolve). `vercel.json` also serves `/manifest.webmanifest`
-with the right `Content-Type` and long-caches `/icons/*`. `_redirects` covers Netlify/Cloudflare
-Pages, which Vercel ignores. Repo: https://github.com/arty2/collaborati.
+Static hosting, no build required by the host. On **Vercel**, `vercel.json` turns the build
+off (no-op `buildCommand`/`installCommand`, `outputDirectory: "."`) and serves the committed
+repo root — otherwise Vercel sees `package.json`, runs `npm run build`, and then fails looking
+for a `public/` output dir. It rewrites `/` → `/collaborati.html` (fixes the root 404;
+`cleanUrls` also makes `/collaborati` resolve), serves `/manifest.webmanifest` with the right
+`Content-Type`, and long-caches `/icons/*`. `.vercelignore` keeps `src/`, `tests/`, and tooling
+out of the deploy. `_redirects` covers Netlify/Cloudflare Pages, which Vercel ignores.
+Repo: https://github.com/arty2/collaborati.

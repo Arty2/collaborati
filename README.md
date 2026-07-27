@@ -102,7 +102,7 @@ Edit `src/`, run `node build.js`, and commit both the source change and the rege
 
 The PWA manifest (`manifest.webmanifest`) and its icons (`icons/`) are committed static files served next to the app. Regenerate the icons from the brand mark with `npm run gen:icons` (uses the Playwright browser; only needed when the mark or its colors change).
 
-Hosting is static. On Vercel, `vercel.json` rewrites `/` to `/collaborati.html` and serves the manifest/icons alongside it; `_redirects` covers Netlify/Cloudflare Pages.
+Hosting is static — nothing to build on the host. On Vercel, `vercel.json` turns the build off and serves the committed repo root, rewrites `/` to `/collaborati.html`, and serves the manifest/icons alongside it; `_redirects` covers Netlify/Cloudflare Pages.
 
 ## Browser support
 

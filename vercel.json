@@ -2,6 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "installCommand": "echo 'no dependencies to install'",
+  "buildCommand": "echo 'no build step — collaborati.html is committed'",
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/", "destination": "/collaborati.html" }
   ],
