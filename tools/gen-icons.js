@@ -20,8 +20,17 @@ const { chromium } = require('@playwright/test');
 const ROOT = path.join(__dirname, '..');
 const ICONS_DIR = path.join(ROOT, 'icons');
 
-const BG = '#e3dedb'; // --bg
-const FG = '#2b0000'; // --text
+// The mark sits white on a full-bleed accent field, matching the app icon
+// artwork in src/icons/icon.png. Full bleed matters for the maskable variant:
+// it gets cropped to a circle or squircle, so the background has to reach the
+// edges — hence a flat field rather than the artwork's drawn badge outline.
+const BG = '#bd1e2e'; // --accent
+const FG = '#ffffff';
+
+// Optical centring nudge, in % of the square. The mark's bounding box centres
+// geometrically, but the delta carries most of the weight on the left, so a
+// centred box reads as leaning right. Negative shifts the mark left.
+const NUDGE_X = -2;
 
 // (filename, size px, padding % of the square)
 const SPECS = [
@@ -45,7 +54,7 @@ function iconHtml({ viewBox, d }, size, padPct) {
 	return `<!DOCTYPE html><html><head><style>*{margin:0;padding:0}html,body{width:${size}px;height:${size}px;overflow:hidden}</style></head><body>
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 100 100">
 <rect width="100" height="100" fill="${BG}"/>
-<svg x="${padPct}" y="${padPct}" width="${inner}" height="${inner}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">
+<svg x="${padPct + NUDGE_X}" y="${padPct}" width="${inner}" height="${inner}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">
 <path fill="${FG}" d="${d}"/>
 </svg></svg></body></html>`;
 }

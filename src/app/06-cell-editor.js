@@ -258,7 +258,7 @@ class PersistenceLayer {
 		if (!this._opfsRoot && typeof indexedDB !== 'undefined') {
 			try {
 				this.#dbPromise = new Promise((resolve, reject) => {
-					const req = indexedDB.open('collaborati', 1);
+					const req = indexedDB.open('detritus', 1);
 					req.onupgradeneeded = (e) => {
 						const db = e.target.result;
 						if (!db.objectStoreNames.contains('state')) db.createObjectStore('state');
@@ -279,7 +279,7 @@ class PersistenceLayer {
 					try { opfsRoot = await self.navigator.storage.getDirectory(); } catch (_) {}
 					if (!opfsRoot) {
 						try {
-							const req = indexedDB.open('collaborati', 1);
+							const req = indexedDB.open('detritus', 1);
 							req.onupgradeneeded = (e) => {
 								const d = e.target.result;
 								if (!d.objectStoreNames.contains('state')) d.createObjectStore('state');
@@ -367,7 +367,7 @@ class PersistenceLayer {
 				const tx = db.transaction('state', 'readwrite');
 				tx.objectStore('state').delete('board');
 			}
-			try { indexedDB.deleteDatabase('collaborati'); } catch (_) {}
+			try { indexedDB.deleteDatabase('detritus'); } catch (_) {}
 		} catch (_) {}
 	}
 }
@@ -384,7 +384,7 @@ function initApp() {
 
 	// Restore saved theme
 	try {
-		const savedTheme = localStorage.getItem('collaborati-theme');
+		const savedTheme = localStorage.getItem('detritus-theme');
 		if (savedTheme === 'dark' || savedTheme === 'light') {
 			document.documentElement.dataset.theme = savedTheme;
 			document.getElementById('icon-moon').style.display = savedTheme === 'dark' ? 'none' : '';
