@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /*
- * build.js — assembles the single-file `detritus.html` from the sources in src/.
+ * build.js — assembles the single-file `detrita.html` from the sources in src/.
  *
  * There is no bundler and no dependency: the pieces are concatenated in filename
  * order and inlined into the shell, so the output is byte-for-byte what you get by
- * hand-writing one file. Edit files under src/ — never edit detritus.html directly.
+ * hand-writing one file. Edit files under src/ — never edit detrita.html directly.
  *
- *   node build.js            # writes ./detritus.html
- *   node build.js --check    # builds in memory and fails if ./detritus.html is stale
+ *   node build.js            # writes ./detrita.html
+ *   node build.js --check    # builds in memory and fails if ./detrita.html is stale
  *
  * See CLAUDE.md for the source layout and conventions.
  */
@@ -20,10 +20,10 @@ const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
 
 // The app ships under two names, both committed and identical:
-//   detritus.html — the portable, shareable single file (openable from file://)
+//   detrita.html — the portable, shareable single file (openable from file://)
 //   index.html       — so any static host (Vercel included) serves it at "/" with
 //                      no rewrite needed. Identical content, so git stores one blob.
-const OUTPUTS = ['detritus.html', 'index.html'].map((f) => path.join(ROOT, f));
+const OUTPUTS = ['detrita.html', 'index.html'].map((f) => path.join(ROOT, f));
 
 const STYLES_MARKER = '/*__BUILD_STYLES__*/\n';
 const SCRIPTS_MARKER = '//__BUILD_SCRIPTS__\n';

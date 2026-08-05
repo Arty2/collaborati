@@ -1,6 +1,6 @@
 # Keep dev-only sources, tests, and tooling out of the static deployment.
 # Vercel serves the repo root (see vercel.json outputDirectory) and the build
-# is a no-op — detritus.html and its assets are committed.
+# is a no-op — detrita.html and its assets are committed.
 node_modules
 /src
 /tests

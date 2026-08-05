@@ -1,6 +1,6 @@
 {
-  "name": "/detritus",
-  "short_name": "detritus",
+  "name": "/detrita",
+  "short_name": "detrita",
   "description": "Local-first, file-native kanban board",
   "id": "/",
   "start_url": "/",

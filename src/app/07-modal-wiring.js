@@ -704,7 +704,7 @@ function wireUpGlobalEvents() {
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = 'detritus-backup.json';
+		a.download = 'detrita-backup.json';
 		a.click();
 		URL.revokeObjectURL(url);
 		showToast('Exported backup');
@@ -1491,8 +1491,8 @@ function serializeBoardMd() {
 
 	// YAML frontmatter
 	let md = '---\n';
-	md += 'kanban-plugin: detritus\n';
-	md += 'detritus: v1\n';
+	md += 'kanban-plugin: detrita\n';
+	md += 'detrita: v1\n';
 	md += 'stages:\n';
 	for (const s of stgs) {
 		md += `  - { id: "${s.id}", label: "${s.name}", color: "${s.color}"${s.done ? ', done: true' : ''}${s.automove ? ', automove: true' : ''} }\n`;
@@ -1859,13 +1859,13 @@ class FileSync {
 
 	setSaveInterval(ms) {
 		this._saveInterval = ms;
-		try { localStorage.setItem('detritus-sync-interval', ms); } catch (_) {}
+		try { localStorage.setItem('detrita-sync-interval', ms); } catch (_) {}
 		if (this._dirty) this.scheduleSave();
 	}
 
 	_loadSaveInterval() {
 		try {
-			const v = localStorage.getItem('detritus-sync-interval');
+			const v = localStorage.getItem('detrita-sync-interval');
 			if (v) this._saveInterval = parseInt(v, 10) || 60000;
 		} catch (_) {}
 	}
@@ -1909,7 +1909,7 @@ class FileSync {
 	async _persistHandle() {
 		try {
 			const db = await new Promise((res, rej) => {
-				const req = indexedDB.open('detritus-sync', 1);
+				const req = indexedDB.open('detrita-sync', 1);
 				req.onupgradeneeded = (e) => e.target.result.createObjectStore('handles');
 				req.onsuccess = () => res(req.result);
 				req.onerror = () => rej(req.error);
@@ -1922,7 +1922,7 @@ class FileSync {
 	async _loadHandle() {
 		try {
 			const db = await new Promise((res, rej) => {
-				const req = indexedDB.open('detritus-sync', 1);
+				const req = indexedDB.open('detrita-sync', 1);
 				req.onupgradeneeded = (e) => e.target.result.createObjectStore('handles');
 				req.onsuccess = () => res(req.result);
 				req.onerror = () => rej(req.error);
@@ -1991,7 +1991,7 @@ function toggleTheme() {
 	document.getElementById('icon-moon').style.display = isDark ? '' : 'none';
 	document.getElementById('icon-sun').style.display = isDark ? 'none' : '';
 	document.querySelector('meta[name="theme-color"]').content = isDark ? '#e3dedb' : '#2b0000';
-	try { localStorage.setItem('detritus-theme', html.dataset.theme); } catch (_) {}
+	try { localStorage.setItem('detrita-theme', html.dataset.theme); } catch (_) {}
 	_cardHtmlCache.clear();
 	renderBoard();
 	renderInbox();
