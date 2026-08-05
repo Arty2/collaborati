@@ -59,20 +59,19 @@ which also runs the build, verifies `detrita.html` isn't stale, and runs both te
   change that still rebuilds the HTML. Never ship a user-visible change without bumping
   something.
 
-  It lives in **five** spots and they must agree, or the tests fail:
+  Always write all three numbers, everywhere — `0.85.0`, never `0.85`. It lives in
+  **five** spots and they must agree, or the tests fail:
 
   | Spot | Form |
   |---|---|
-  | `src/index.html` (help panel) | `Current version: X.Y (YYYY-MM-DD)` |
-  | `README.md` (link block) | `Current version: X.Y (YYYY-MM-DD)` |
-  | `package.json` `version` | `X.Y.Z` — always all three numbers |
+  | `src/index.html` (help panel) | `Current version: X.Y.Z (YYYY-MM-DD)` |
+  | `README.md` (link block) | `Current version: X.Y.Z (YYYY-MM-DD)` |
+  | `package.json` `version` | `X.Y.Z` |
   | `tests/integrity.test.js` | asserts the built version string |
   | `tests/smoke.spec.js` | asserts the help panel shows it |
 
-  The help panel and README drop a zero patch — write `0.85`, not `0.85.0` — and show it
-  only when it is non-zero: `0.85.1`. `package.json` always carries the full triple, since
-  it is semver. Bumping the version is an HTML change, so bump the service worker cache
-  with it (below) — unless the cache has already been bumped since the last release.
+  Bumping the version is an HTML change, so bump the service worker cache with it
+  (below) — unless the cache has already been bumped since the last release.
 - **Service worker cache** name is `const CACHE = 'detrita-vN'` in
   `src/app/08-service-worker.js`. Bump `N` whenever you ship HTML changes so returning
   offline/PWA users pick up the new build.
