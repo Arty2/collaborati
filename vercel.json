@@ -3,10 +3,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "installCommand": "echo 'no dependencies to install'",
-  "buildCommand": "echo 'no build step — detritus.html is committed'",
+  "buildCommand": "echo 'no build step — detrita.html is committed'",
   "outputDirectory": ".",
   "rewrites": [
-    { "source": "/", "destination": "/detritus.html" }
+    { "source": "/", "destination": "/detrita.html" }
   ],
   "headers": [
     {

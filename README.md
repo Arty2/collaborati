@@ -1,14 +1,23 @@
-# /detritus
+# /detrita
 
 A local-first kanban board. No account, no server — your data stays in the browser.
 
-- Project website: [heracl.es/detritus](https://heracl.es/detritus)
-- Source code: [github.com/arty2/collaborati](https://github.com/arty2/collaborati)
-- Current version: 0.82 (2026-07-27)
+- Project page: [heracl.es/detrita](https://heracl.es/detrita)
+- Demo: [detrita.vercel.app](https://detrita.vercel.app/)
+- Source: [github.com/arty2/detrita](https://github.com/arty2/detrita)
+- Current version: 0.85.0 (2026-08-05)
 
 ## Mental model
 
 Stages (columns) are shared across all swimlanes. Swimlanes are horizontal rows. Each cell (swimlane × stage) holds sorted cards. The Inbox is a virtual swimlane for unsorted cards.
+
+## Etymology
+
+*Detritus* is a learned borrowing from Latin **dētrītus**, "that which is rubbed away", from **dēterere**, "to wear down".
+
+The Latin noun is fourth declension, so its plural is **dētrītūs** — spelled exactly like the singular. *Detrita* is what you get by declining it as though it were second-declension neuter, on the model of *datum* → *data*. Wiktionary marks the result a hypercorrection: a plural for things that were never supposed to accumulate.
+
+It has two anagrams, and a board like this earns both: *attired* and *eat dirt*.
 
 ## Data
 
@@ -88,16 +97,16 @@ Single-file HTML app (~281 KB, assembled from `src/`). Three-level keyed DOM rec
 
 ## Build & deploy
 
-No framework and no runtime dependencies — the app is one static file. Sources live in `src/` (HTML shell, CSS split by `@layer`, JS split by section) and a zero-dependency Node script inlines them into the single `detritus.html`:
+No framework and no runtime dependencies — the app is one static file. Sources live in `src/` (HTML shell, CSS split by `@layer`, JS split by section) and a zero-dependency Node script inlines them into the single `detrita.html`:
 
 ```sh
-node build.js            # regenerate detritus.html + index.html   (npm run build)
+node build.js            # regenerate detrita.html + index.html   (npm run build)
 node build.js --check    # fail if the committed output is stale
 npm test                 # Playwright smoke tests
 npm run test:integrity   # build-integrity checks (no browser)
 ```
 
-The build writes two identical files: `detritus.html` (the portable, shareable single file, openable from `file://`) and `index.html` (so any static host serves the app at `/`). Edit `src/`, run `node build.js`, and commit both regenerated files with the source change. GitHub Actions builds, verifies the committed output is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
+The build writes two identical files: `detrita.html` (the portable, shareable single file, openable from `file://`) and `index.html` (so any static host serves the app at `/`). Edit `src/`, run `node build.js`, and commit both regenerated files with the source change. GitHub Actions builds, verifies the committed output is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
 
 The PWA manifest (`manifest.webmanifest`) and its icons (`icons/`) are committed static files served next to the app. Regenerate the icons from the brand mark with `npm run gen:icons` (uses the Playwright browser; only needed when the mark or its colors change).
 

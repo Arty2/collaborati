@@ -8,32 +8,32 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.join(__dirname, '..');
-const OUT = path.join(ROOT, 'detritus.html');
+const OUT = path.join(ROOT, 'detrita.html');
 
-test('committed detritus.html matches a fresh build (not stale)', () => {
+test('committed detrita.html matches a fresh build (not stale)', () => {
 	// build.js --check exits non-zero if the committed file differs from a rebuild.
 	execFileSync('node', ['build.js', '--check'], { cwd: ROOT, stdio: 'pipe' });
 });
 
 test('built file carries the expected markers', () => {
 	const html = fs.readFileSync(OUT, 'utf8');
-	assert.match(html, /0\.82 \(2026-07-27\)/, 'version string present');
-	assert.match(html, /detritus-v3/, 'service worker cache bumped to v3');
+	assert.match(html, /0\.85\.0 \(2026-08-05\)/, 'version string present');
+	assert.match(html, /detrita-v3/, 'service worker cache bumped to v3');
 	assert.match(html, /rel="apple-touch-icon"/, 'apple-touch-icon present');
 	// The manifest is a separate static file, linked by URL — not inlined.
 	assert.match(html, /rel="manifest" href="\/manifest\.webmanifest"/, 'links the manifest file');
 	assert.doesNotMatch(html, /data:application\/manifest\+json/, 'no inline data: manifest');
 });
 
-test('index.html is emitted for root serving and mirrors detritus.html', () => {
+test('index.html is emitted for root serving and mirrors detrita.html', () => {
 	const index = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 	const main = fs.readFileSync(OUT, 'utf8');
-	assert.equal(index, main, 'index.html is identical to detritus.html');
+	assert.equal(index, main, 'index.html is identical to detrita.html');
 });
 
 test('manifest.webmanifest is valid JSON and its icons exist on disk', () => {
 	const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.webmanifest'), 'utf8'));
-	assert.equal(manifest.name, '/detritus');
+	assert.equal(manifest.name, '/detrita');
 	assert.equal(manifest.display, 'standalone');
 	assert.equal(manifest.start_url, '/');
 	const sizes = manifest.icons.map((i) => i.sizes);
