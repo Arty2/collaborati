@@ -5,7 +5,7 @@ A local-first kanban board. No account, no server — your data stays in the bro
 - Project page: [heracl.es/detrita](https://heracl.es/detrita)
 - Demo: [detrita.vercel.app](https://detrita.vercel.app/)
 - Source: [github.com/arty2/detrita](https://github.com/arty2/detrita)
-- Current version: 0.82 (2026-07-27)
+- Current version: 0.85 (2026-08-05)
 
 ## Mental model
 
