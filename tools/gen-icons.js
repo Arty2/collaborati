@@ -27,6 +27,11 @@ const ICONS_DIR = path.join(ROOT, 'icons');
 const BG = '#bd1e2e'; // --accent
 const FG = '#ffffff';
 
+// Optical centring nudge, in % of the square. The mark's bounding box centres
+// geometrically, but the delta carries most of the weight on the left, so a
+// centred box reads as leaning right. Negative shifts the mark left.
+const NUDGE_X = -2;
+
 // (filename, size px, padding % of the square)
 const SPECS = [
 	['icon-192.png', 192, 9],
@@ -49,7 +54,7 @@ function iconHtml({ viewBox, d }, size, padPct) {
 	return `<!DOCTYPE html><html><head><style>*{margin:0;padding:0}html,body{width:${size}px;height:${size}px;overflow:hidden}</style></head><body>
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 100 100">
 <rect width="100" height="100" fill="${BG}"/>
-<svg x="${padPct}" y="${padPct}" width="${inner}" height="${inner}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">
+<svg x="${padPct + NUDGE_X}" y="${padPct}" width="${inner}" height="${inner}" viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet">
 <path fill="${FG}" d="${d}"/>
 </svg></svg></body></html>`;
 }
