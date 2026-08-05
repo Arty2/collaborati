@@ -2,7 +2,7 @@
 try {
 	if ('serviceWorker' in navigator && navigator.serviceWorker && location.protocol !== 'file:') {
 	const SW_CODE = `
-		const CACHE = 'collaborati-v2';
+		const CACHE = 'detritus-v3';
 		const ASSETS = ['/'];
 
 		self.addEventListener('install', (e) => {

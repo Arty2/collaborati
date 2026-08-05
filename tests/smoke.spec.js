@@ -1,14 +1,14 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-const APP = '/collaborati.html';
+const APP = '/detritus.html';
 
 test('boots with a rendered board and no uncaught errors', async ({ page }) => {
 	const pageErrors = [];
 	page.on('pageerror', (e) => pageErrors.push(e.message));
 
 	await page.goto(APP);
-	await expect(page).toHaveTitle('/collaborati');
+	await expect(page).toHaveTitle('/detritus');
 
 	// Default board seeds a set of stage columns.
 	const board = page.locator('#board');
@@ -19,13 +19,13 @@ test('boots with a rendered board and no uncaught errors', async ({ page }) => {
 });
 
 test('serves the app at the site root', async ({ page }) => {
-	// index.html is emitted next to collaborati.html so "/" serves the board
+	// index.html is emitted next to detritus.html so "/" serves the board
 	// directly on any static host (no rewrite required).
 	const pageErrors = [];
 	page.on('pageerror', (e) => pageErrors.push(e.message));
 
 	await page.goto('/');
-	await expect(page).toHaveTitle('/collaborati');
+	await expect(page).toHaveTitle('/detritus');
 	await expect(page.locator('#board')).toBeVisible();
 	expect(pageErrors, 'no uncaught page errors at root').toEqual([]);
 });
@@ -66,8 +66,8 @@ test('links a valid web app manifest served as a separate file', async ({ page }
 		return res.json();
 	});
 
-	expect(manifest.name).toBe('/collaborati');
-	expect(manifest.short_name).toBe('collaborati');
+	expect(manifest.name).toBe('/detritus');
+	expect(manifest.short_name).toBe('detritus');
 	expect(manifest.display).toBe('standalone');
 	const sizes = manifest.icons.map((i) => i.sizes);
 	expect(sizes).toContain('192x192');
