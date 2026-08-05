@@ -20,8 +20,12 @@ const { chromium } = require('@playwright/test');
 const ROOT = path.join(__dirname, '..');
 const ICONS_DIR = path.join(ROOT, 'icons');
 
-const BG = '#e3dedb'; // --bg
-const FG = '#2b0000'; // --text
+// The mark sits white on a full-bleed accent field, matching the app icon
+// artwork in src/icons/icon.png. Full bleed matters for the maskable variant:
+// it gets cropped to a circle or squircle, so the background has to reach the
+// edges — hence a flat field rather than the artwork's drawn badge outline.
+const BG = '#bd1e2e'; // --accent
+const FG = '#ffffff';
 
 // (filename, size px, padding % of the square)
 const SPECS = [
