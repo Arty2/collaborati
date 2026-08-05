@@ -4,7 +4,8 @@ A local-first kanban board. No account, no server — your data stays in the bro
 
 - Live instance: [collaborati.online](https://collaborati.online)
 - Project website: [heracl.es/collaborati](https://heracl.es/collaborati)
-- Current version: 0.81 (2026-04-06)
+- Source code: [github.com/arty2/collaborati](https://github.com/arty2/collaborati)
+- Current version: 0.82 (2026-07-27)
 
 ## Mental model
 
@@ -84,7 +85,24 @@ Stage templates remap columns semantically: Kanban, Scrum, GTD, Sales, CRM, Cont
 
 ## Architecture
 
-Single-file HTML app (~275 KB). Three-level keyed DOM reconciler with card signature memoization and RAF-coalesced renders. OPFS primary persistence, IndexedDB fallback, inline Web Worker for off-main-thread writes. File sync via File System Access API with SHA-256 change detection.
+Single-file HTML app (~281 KB, assembled from `src/`). Three-level keyed DOM reconciler with card signature memoization and RAF-coalesced renders. OPFS primary persistence, IndexedDB fallback, inline Web Worker for off-main-thread writes. File sync via File System Access API with SHA-256 change detection. Installable as a PWA (`manifest.webmanifest` + `icons/` served alongside the app, plus a service worker for offline use).
+
+## Build & deploy
+
+No framework and no runtime dependencies — the app is one static file. Sources live in `src/` (HTML shell, CSS split by `@layer`, JS split by section) and a zero-dependency Node script inlines them into the single `collaborati.html`:
+
+```sh
+node build.js            # regenerate collaborati.html + index.html   (npm run build)
+node build.js --check    # fail if the committed output is stale
+npm test                 # Playwright smoke tests
+npm run test:integrity   # build-integrity checks (no browser)
+```
+
+The build writes two identical files: `collaborati.html` (the portable, shareable single file, openable from `file://`) and `index.html` (so any static host serves the app at `/`). Edit `src/`, run `node build.js`, and commit both regenerated files with the source change. GitHub Actions builds, verifies the committed output is current, and runs the tests on every push. See [CLAUDE.md](CLAUDE.md) for the source layout and conventions.
+
+The PWA manifest (`manifest.webmanifest`) and its icons (`icons/`) are committed static files served next to the app. Regenerate the icons from the brand mark with `npm run gen:icons` (uses the Playwright browser; only needed when the mark or its colors change).
+
+Hosting is static — nothing to build on the host. `index.html` at the root makes `/` serve the app on any static host. On Vercel, `vercel.json` turns the build off and serves the committed repo root with the right manifest/icon headers; `_redirects` covers Netlify/Cloudflare Pages.
 
 ## Browser support
 

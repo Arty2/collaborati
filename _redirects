@@ -1,2 +1,3 @@
+# Netlify / Cloudflare Pages redirects. Vercel ignores this file — see vercel.json.
 /  /collaborati.html 307
 /index.html  /collaborati.html 307

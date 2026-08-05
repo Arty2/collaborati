@@ -1,0 +1,10 @@
+# Keep dev-only sources, tests, and tooling out of the static deployment.
+# Vercel serves the repo root (see vercel.json outputDirectory) and the build
+# is a no-op — collaborati.html and its assets are committed.
+node_modules
+/src
+/tests
+/tools
+/.github
+build.js
+playwright.config.js

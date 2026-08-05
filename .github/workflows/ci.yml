@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the single file
+        run: node build.js
+
+      - name: Verify committed build output is up to date
+        run: |
+          if ! git diff --quiet -- collaborati.html index.html; then
+            echo "::error::Build output is stale. Run \`node build.js\` and commit the result."
+            git --no-pager diff -- collaborati.html index.html
+            exit 1
+          fi
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run build-integrity tests
+        run: npm run test:integrity
+
+      - name: Run Playwright smoke tests
+        run: npm test
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore

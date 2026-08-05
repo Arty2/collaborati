@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/collaborati</title>
+<meta name="description" content="Local-first, file-native kanban board">
+<meta name="theme-color" content="#e3dedb">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="collaborati">
+<meta name="theme-color" content="#2b0000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/x-icon;base64,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">
+
+<style>
+/*__BUILD_STYLES__*/
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<defs>
+	<symbol id="i-drag" viewBox="0 0 14 14"><circle cx="2.5" cy="2.5" r="1.3"/><circle cx="7" cy="2.5" r="1.3"/><circle cx="11.5" cy="2.5" r="1.3"/><circle cx="2.5" cy="7" r="1.3"/><circle cx="7" cy="7" r="1.3"/><circle cx="11.5" cy="7" r="1.3"/><circle cx="2.5" cy="11.5" r="1.3"/><circle cx="7" cy="11.5" r="1.3"/><circle cx="11.5" cy="11.5" r="1.3"/></symbol>
+	<symbol id="i-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+	<symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+	<symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+	<symbol id="i-check-sq" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><polyline points="9 12 11.5 14.5 16 9.5"/></symbol>
+	<symbol id="i-square" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/></symbol>
+	<symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+</defs>
+</svg>
+
+<!-- ═══ Header ═══ -->
+<header class="header">
+	<div class="brand" id="brand"><svg class="brand-svg brand-svg--main" viewBox="208 248 603 523" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M372 277.8h61.8L287.1 746.2h-61.5ZM460 454q0 72 16.5 127.1 16.6 55.1 55.5 89.6 38.8 34.6 95.7 34.6 122.4 0 159.1-78.5h11.6q-46.1 132.5-180 132.5-94.4 0-154.5-73.5t-60.1-179.2q0-77.1 25.9-142.6 34.6-87.8 97.9-87.8 49 0 66.3 56.1l54-67.7q52.5 33.9 82.8 33.9 28.8 0 48.2-25.2L789 279q-44.6 64.1-97.9 64.1-26.7 0-70.6-23-24.5 24.5-24.5 45.3 0 26 37.5 90 37.4 64.1 37.4 91.5 0 59-64.1 114.5l-7.2-10.1q23.1-19.5 23.1-49 0-25.2-33.9-85.7-33.8-60.4-33.8-90.7 0-35.3 28.8-79.9-2.9-22.3-16.2-38.9t-34.9-16.5Q460 290.6 460 454"/></svg><svg class="brand-svg brand-svg--alt" viewBox="208 248 603 523" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M402.2,300.4H457.5L326.2,719.5H271.2ZM748.8,722.4Q722.4,736.1,693.8,743Q665.2,750,634,750Q541.2,750,486.9,698.1Q432.6,646.2,432.6,557.3Q432.6,468.2,486.9,416.2Q541.2,364.3,634,364.3Q665.2,364.3,693.8,371.3Q722.4,378.3,748.8,392V468.9Q722.2,450.7,696.3,442.3Q670.4,433.8,641.8,433.8Q590.5,433.8,561.1,466.7Q531.7,499.5,531.7,557.3Q531.7,614.8,561.1,647.7Q590.5,680.5,641.8,680.5Q670.4,680.5,696.3,672.1Q722.2,663.6,748.8,645.4ZM585.5,335.7 530,269.9H574.3L623.8,310.3L673.4,269.9H717.7L662.2,335.7Z"/></svg></div>
+	<div class="header-right">
+		<div class="filter-wrap" id="filter-wrap">
+			<input class="filter-input" id="filter-input" type="text" placeholder="#tag @name $type …" autocomplete="off" spellcheck="false">
+			<button class="filter-clear" id="filter-clear" aria-label="Clear filter">
+				<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+			</button>
+		</div>
+		<button class="filter-nav" id="filter-prev" aria-label="Previous card" title="Previous (Shift+Tab)">
+			<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+		</button>
+		<button class="filter-nav" id="filter-next" aria-label="Next card" title="Next (Tab)">
+			<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><polyline points="9 6 15 12 9 18"/></svg>
+		</button>
+		<button class="hbtn hbtn--ghost" id="btn-stats" aria-label="Stats" title="Board statistics">
+			<span id="stats-count" class="stats-count">0</span>
+		</button>
+		<div class="hbtns" id="hbtns-group" style="margin-left:auto">
+			<button class="hbtn" id="btn-theme" aria-label="Toggle theme" title="Click: toggle theme&#10;Long press: print preview">
+				<svg id="icon-moon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+				<svg id="icon-sun" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+					<svg id="icon-printer" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" style="display:none"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+			</button>
+			<button class="hbtn" id="btn-vault" aria-label="Export / Import" title="Export / Import">
+				<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+			</button>
+			<button class="hbtn" id="btn-help" aria-label="Help" title="? Help&#10;&#10;↑↓←→ Navigate · Shift+↑↓ Select · Enter Open&#10;n New · e Edit · Del Delete · Space Done&#10;i Inbox · / Search · Ctrl+O Import · Ctrl+S Export&#10;Ctrl+Z Undo · Ctrl+Shift+Z Redo">
+				<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+			</button>
+			<button class="hbtn" id="btn-redo" aria-label="Redo" title="Redo (Ctrl+Shift+Z)">
+				<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></svg>
+			</button>
+			<button class="hbtn" id="btn-undo" aria-label="Undo" title="Undo (Ctrl+Z)">
+				<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+			</button>
+		</div>
+	</div>
+</header>
+
+<!-- ═══ Stats Bar ═══ -->
+<div class="stats-bar" id="stats-bar"></div>
+
+<!-- ═══ Board Area ═══ -->
+<div class="board-area">
+	<div class="board-scroll" id="board-scroll">
+		<div class="board" id="board" role="grid" aria-label="Kanban board"></div>
+	</div>
+</div>
+
+<!-- ═══ Inbox Panel (fixed, outside board-area) ═══ -->
+<div class="inbox-panel" id="inbox-panel">
+	<div class="inbox-handle" id="inbox-handle"><span class="inbox-handle-bar"></span></div>
+	<div class="inbox-list-wrap">
+		<div class="inbox-scroll-shadow inbox-scroll-shadow--top" id="inbox-shadow-top"></div>
+		<div class="inbox-list" id="inbox-list"></div>
+		<div class="inbox-scroll-shadow inbox-scroll-shadow--bottom" id="inbox-shadow-bottom"></div>
+	</div>
+</div>
+
+<!-- ═══ Bottom Bar ═══ -->
+<div class="bottom-bar">
+	<input class="quick-input" id="quick-input" type="text" placeholder="Add card … #tag @name $type" autocomplete="off" spellcheck="false">
+	<button class="inbox-toggle" id="inbox-toggle">
+		<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+		<span>Inbox</span>
+		<span class="inbox-badge" id="inbox-badge">0</span>
+	</button>
+</div>
+
+<!-- ═══ Card Detail Panel ═══ -->
+<div class="cpanel-backdrop" id="cpanel-backdrop">
+	<div class="cpanel" id="cpanel">
+		<div class="cpanel-scroll">
+			<div class="cpanel-header">
+				<textarea class="cpanel-title" id="cpanel-title" rows="1" placeholder="Card title…"></textarea>
+			</div>
+			<div class="cpanel-body" id="cpanel-card-body">
+			<div class="cpanel-field">
+				<label>Notes</label>
+				<div id="cpanel-notes-preview" class="cpanel-notes-preview"></div>
+				<textarea id="cpanel-notes" style="display:none"></textarea>
+			</div>
+			<div class="cpanel-dates">
+				<div class="cpanel-field">
+					<label>Start Date</label>
+					<input type="date" id="cpanel-start">
+				</div>
+				<div class="cpanel-field">
+					<label>Due Date</label>
+					<input type="date" id="cpanel-due">
+				</div>
+			</div>
+			<div class="cpanel-dates">
+				<div class="cpanel-field">
+					<label>Swimlane</label>
+					<select id="cpanel-project" class="cpanel-select"></select>
+				</div>
+				<div class="cpanel-field">
+					<label>Stage</label>
+					<select id="cpanel-stage" class="cpanel-select"></select>
+				</div>
+			</div>
+			<div class="cpanel-field">
+				<label>Type</label>
+				<div class="type-toggle" id="cpanel-type">
+					<button class="type-toggle-btn active" data-type="task"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Task</button>
+					<button class="type-toggle-btn" data-type="meeting"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Meeting</button>
+					<button class="type-toggle-btn" data-type="followup"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg> Follow-up</button>
+				</div>
+			</div>
+			<div class="cpanel-field">
+				<label>Assigned To</label>
+				<div class="cpanel-chips" id="cpanel-assignees">
+					<input class="chip-input" id="cpanel-assignee-input" placeholder="name, …">
+				</div>
+			</div>
+			<div class="cpanel-field">
+				<label>Labels</label>
+				<div class="cpanel-chips" id="cpanel-labels">
+					<input class="chip-input" id="cpanel-label-input" placeholder="label, …">
+				</div>
+			</div>
+		</div>
+		<div class="cpanel-body" id="cpanel-cell-body" style="display:none">
+			<div class="cpanel-field">
+				<label>Edit cards as Markdown</label>
+				<textarea id="cpanel-cell-md" class="cpanel-cell-textarea"></textarea>
+			</div>
+		</div>
+		</div>
+		<div class="cpanel-actions">
+			<button class="btn btn--sq btn--icon-danger" id="cpanel-delete" title="Delete card" style="margin-right:auto"><svg width="14" height="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><use href="#i-trash"/></svg></button>
+			<button class="btn btn--sq btn--icon-danger cpanel-cell-only" id="cpanel-cell-delete" title="Delete all cards in cell" style="display:none;margin-right:auto"><svg width="14" height="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><use href="#i-trash"/></svg></button>
+			<button class="btn btn--sq cpanel-cell-only" id="cpanel-cell-unindent" title="Remove indent" style="display:none"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" style="transform:scaleX(-1)"><polyline points="13 4 21 4"/><polyline points="13 12 21 12"/><polyline points="13 20 21 20"/><polyline points="3 8 9 12 3 16"/></svg></button>
+			<button class="btn btn--sq cpanel-cell-only" id="cpanel-cell-indent" title="Insert indent (for notes)" style="display:none"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><polyline points="13 4 21 4"/><polyline points="13 12 21 12"/><polyline points="13 20 21 20"/><polyline points="3 8 9 12 3 16"/></svg></button>
+			<span class="cpanel-autosave" id="cpanel-autosave"></span>
+			<button class="btn" id="cpanel-cancel">Cancel</button>
+			<button class="btn btn--accent" id="cpanel-close">Close</button>
+		</div>
+	</div>
+</div>
+
+<!-- ═══ Add Swimlane Modal ═══ -->
+<div class="modal-backdrop" id="add-proj-modal">
+	<div class="modal">
+		<h3 id="proj-modal-title">New Swimlane</h3>
+		<div class="modal-field">
+			<label>Swimlane Name</label>
+			<input type="text" id="proj-name-input" placeholder="e.g. Marketing">
+		</div>
+		<div class="modal-field">
+			<label>Colour</label>
+			<div class="color-swatches" id="proj-color-swatches"></div>
+		</div>
+		<div class="modal-actions">
+			<button class="btn btn--danger" id="proj-modal-delete" style="margin-right:auto;display:none">Delete</button>
+			<button class="btn" id="proj-modal-cancel">Cancel</button>
+			<button class="btn btn--accent" id="proj-modal-create">Create</button>
+		</div>
+	</div>
+</div>
+
+<!-- ═══ Column Modal (create / edit) ═══ -->
+<div class="modal-backdrop" id="add-col-modal">
+	<div class="modal">
+		<h3 id="col-modal-title">New Stage</h3>
+		<div class="modal-field">
+			<label>Stage Name</label>
+			<input type="text" id="col-name-input" placeholder="e.g. Testing">
+		</div>
+		<div class="modal-field" style="display:flex;align-items:center;gap:8px">
+			<input type="checkbox" id="col-done-toggle" style="accent-color:var(--accent);width:16px;height:16px">
+			<label for="col-done-toggle" style="margin-bottom:0;text-transform:none;font-size:13px;color:var(--text);letter-spacing:0">Mark as "done"</label>
+		</div>
+		<div class="modal-field" style="display:flex;align-items:center;gap:8px">
+			<input type="checkbox" id="col-automove-toggle" style="accent-color:var(--accent);width:16px;height:16px" disabled>
+			<label for="col-automove-toggle" style="margin-bottom:0;text-transform:none;font-size:13px;color:var(--muted);letter-spacing:0" id="col-automove-label">Auto-move done cards here</label>
+		</div>
+		<div class="modal-actions">
+			<button class="btn btn--danger" id="col-modal-delete" style="margin-right:auto;display:none">Delete</button>
+			<button class="btn" id="col-modal-cancel">Cancel</button>
+			<button class="btn btn--accent" id="col-modal-create">Create</button>
+		</div>
+	</div>
+</div>
+
+<!-- ═══ Help Panel ═══ -->
+<div class="help-backdrop" id="help-backdrop">
+	<div class="help-panel">
+		<button class="help-close" id="help-close" aria-label="Close help">
+			<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+		</button>
+		<h2 class="panel-title">/collaborati</h2>
+		<p class="help-desc">
+			A local-first kanban board. No account, no server — your data stays in the browser.
+		</p>
+		<ul class="help-list">
+			<li>Live instance: <a href="https://collaborati.online" target="_blank" rel="noopener" class="help-link">collaborati.online</a></li>
+			<li>Project website: <a href="https://heracl.es/collaborati" target="_blank" rel="noopener" class="help-link">heracl.es/collaborati</a></li>
+			<li>Current version: 0.82 (2026-07-27)</li>
+		</ul>
+		<h4>Mental model</h4>
+		<p class="help-desc">
+			Stages (columns) are shared across all swimlanes.
+			Swimlanes are horizontal rows. Each cell (swimlane × stage) holds sorted cards.
+			The Inbox is a virtual swimlane for unsorted cards.
+		</p>
+		<h4>Data</h4>
+		<p class="help-desc">
+			Saved locally in the browser (OPFS/IndexedDB). Export to Obsidian-compatible Markdown, CSV, or JSON. Sync to a local <code>.md</code> file via the Export / Import panel — works with Syncthing, Obsidian Sync, and Dropbox (Chrome/Edge). Long-press the theme button for print preview.
+		</p>
+		<h4>Keyboard Shortcuts</h4>
+		<div class="help-shortcuts">
+			<div class="help-keys"><kbd>↑</kbd> <kbd>↓</kbd></div> <span>Navigate cards within column</span>
+			<div class="help-keys"><kbd>←</kbd> <kbd>→</kbd></div> <span>Move focus to adjacent column</span>
+			<div class="help-keys"><kbd>Shift</kbd> <kbd>↑</kbd> <kbd>↓</kbd></div> <span>Select cards</span>
+			<div class="help-keys"><kbd>Tab</kbd></div> <span>Cycle: input → buttons → cards</span>
+			<div class="help-keys"><kbd>Page Down</kbd> <kbd>Page Up</kbd></div> <span>Next / previous swimlane</span>
+			<div class="help-keys"><kbd>Enter</kbd></div> <span>Open card detail panel</span>
+			<div class="help-keys"><kbd>e</kbd></div> <span>Inline edit focused card title</span>
+			<div class="help-keys"><kbd>n</kbd></div> <span>New card in focused column</span>
+			<div class="help-keys"><kbd>Delete</kbd></div> <span>Delete focused card</span>
+			<div class="help-keys"><kbd>Space</kbd></div> <span>Toggle done on focused card</span>
+			<div class="help-keys"><kbd>Esc</kbd></div> <span>Close panel or cancel</span>
+			<div class="help-keys"><kbd>/</kbd> or <kbd>Ctrl</kbd> <kbd>F</kbd></div> <span>Focus search</span>
+			<div class="help-keys"><kbd>i</kbd></div> <span>Toggle inbox panel</span>
+			<div class="help-keys"><kbd>?</kbd> or <kbd>F1</kbd></div> <span>Toggle this help panel</span>
+			<div class="help-keys"><kbd>Alt</kbd> <kbd>↑</kbd> <kbd>↓</kbd></div> <span>Reorder card within column</span>
+			<div class="help-keys"><kbd>Alt</kbd> <kbd>←</kbd> <kbd>→</kbd></div> <span>Move card to adjacent column</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>N</kbd></div> <span>Focus quick capture input</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>O</kbd></div> <span>Open Export / Import</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>S</kbd></div> <span>Export as Markdown</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd></div> <span>Copy board to clipboard</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>O</kbd></div> <span>Paste board from clipboard</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>Z</kbd></div> <span>Undo</span>
+			<div class="help-keys"><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Z</kbd></div> <span>Redo</span>
+		</div>
+		<h4>Interactions</h4>
+		<div class="help-shortcuts">
+			<div class="help-keys">Double-click card</div> <span>Toggle done / not done</span>
+			<div class="help-keys">Double-click stage</div> <span>Rename stage</span>
+			<div class="help-keys">Double-click swimlane</div> <span>Rename swimlane</span>
+			<div class="help-keys">Double-click cell</div> <span>New card in that cell</span>
+			<div class="help-keys">Long-press + button</div> <span>Edit cell as Markdown</span>
+			<div class="help-keys">Long-press Inbox</div> <span>Edit inbox as Markdown</span>
+			<div class="help-keys">Drag card</div> <span>Move across columns or swimlanes</span>
+			<div class="help-keys">Drag to brand</div> <span>Delete card</span>
+			<div class="help-keys">Drag handle</div> <span>Reorder swimlanes or stages</span>
+			<div class="help-keys">Shift + click card</div> <span>Multi-select cards</span>
+			<div class="help-keys">Swipe right on panel</div> <span>Close card detail panel</span>
+		</div>
+		<div class="help-credits">
+			Dialectic Acheropoieton of <a href="https://heracl.es" target="_blank" rel="noopener" class="help-link">Heracles Papatheodorou</a>, MIT&nbsp;License
+		</div>
+	</div>
+</div>
+
+<!-- ═══ Export / Import Panel ═══ -->
+<div class="vault-backdrop" id="vault-modal">
+	<div class="vault-panel" id="vault-panel">
+		<button class="help-close" id="vault-modal-close" aria-label="Close">
+			<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+		</button>
+		<h3 class="panel-title">Export / Import</h3>
+		<div class="vault-col">
+			<p class="vault-section">Export</p>
+			<button class="btn btn--full" id="vault-clipboard">Copy to clipboard</button>
+			<button class="btn btn--full" id="vault-export">Export as Markdown</button>
+			<button class="btn btn--full" id="vault-csv-export">Export as CSV</button>
+			<button class="btn btn--full" id="vault-json-export">Export as JSON</button>
+
+			<p class="vault-section">Import</p>
+			<button class="btn btn--full" id="vault-clipboard-paste">Paste from clipboard</button>
+			<div class="vault-rel">
+				<button class="btn btn--full" id="vault-import-btn">Import Markdown</button>
+				<input type="file" id="vault-import-file" accept=".md,.txt" class="vault-file">
+			</div>
+			<div class="vault-rel">
+				<button class="btn btn--full" id="vault-csv-import-btn">Import CSV</button>
+				<input type="file" id="vault-csv-import-file" accept=".csv" class="vault-file">
+			</div>
+			<div class="vault-rel">
+				<button class="btn btn--full" id="vault-json-import-btn">Import JSON</button>
+				<input type="file" id="vault-json-import-file" accept=".json" class="vault-file">
+			</div>
+
+			<p class="vault-section">File Sync</p>
+			<div id="sync-controls" class="vault-col">
+				<button class="btn btn--full" id="sync-connect-btn">Connect to file…</button>
+				<div id="sync-status" class="sync-status" style="display:none">
+					<span id="sync-filename"></span>
+					<div class="vault-row" style="margin-top:6px">
+						<button class="btn flex-1" id="sync-save-now">Save now</button>
+						<button class="btn flex-1" id="sync-disconnect">Disconnect</button>
+					</div>
+				</div>
+				<div id="sync-interval-toggle" class="vault-row--tight" style="margin-top:2px">
+					<button class="btn sync-iv sync-iv--on flex-1" data-iv="60000">1 min</button>
+					<button class="btn sync-iv flex-1" data-iv="600000">10 min</button>
+					<button class="btn sync-iv flex-1" data-iv="1800000">30 min</button>
+				</div>
+			</div>
+
+			<p class="vault-section">Stage templates</p>
+			<p class="vault-hint">Remaps stages semantically. Unmatched cards go to inbox.</p>
+			<div class="vault-row--tight" style="flex-wrap:wrap;align-items:center">
+				<button class="btn btn-tpl" data-tpl="kanban">Kanban</button>
+				<button class="btn btn-tpl" data-tpl="scrum">Scrum</button>
+				<button class="btn btn-tpl" data-tpl="gtd">GTD</button>
+				<button class="btn btn-tpl" data-tpl="sales">Sales</button>
+				<button class="btn btn-tpl" data-tpl="crm">CRM</button>
+				<button class="btn btn-tpl" data-tpl="content">Content</button>
+				<button class="btn btn-tpl" data-tpl="support">Support</button>
+			</div>
+
+			<hr style="border:none;border-top:1px solid var(--border);margin:8px 0 2px">
+			<div class="vault-row">
+				<button class="btn btn-tpl" data-tpl="demo" style="flex:1">Demo</button>
+				<button class="btn btn--danger" id="vault-reset" style="flex:1">Reset &amp; Clear</button>
+			</div>
+		</div>
+		<div id="vault-status" style="margin-top:12px;font-size:11px;color:var(--muted);display:none"></div>
+	</div>
+</div>
+
+<!-- ═══ Conflict Panel ═══ -->
+
+<!-- ═══ Toast Container ═══ -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ═══ Live Region ═══ -->
+<div id="announce" aria-live="assertive" class="sr-only"></div>
+
+<script>
+//__BUILD_SCRIPTS__
+</script>
+</body>
+</html>
